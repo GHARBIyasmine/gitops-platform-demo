@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: apps/guestbook/overlays/dev
   destination:
-    server: https://dev.vc-dev
+    server: https://dev.vc-dev:443
     namespace: guestbook
   syncPolicy:
     automated:

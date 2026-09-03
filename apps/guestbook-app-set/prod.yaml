@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: apps/guestbook/overlays/prod
   destination:
-    server: https://prod.vc-prod
+    server: https://prod.vc-prod:443
     namespace: guestbook
   syncPolicy:
   # In the prod environment, we want to be more careful about what gets deployed especially in early adoption of GitOps. So we will not enable self-healing, and we will not enable pruning. 

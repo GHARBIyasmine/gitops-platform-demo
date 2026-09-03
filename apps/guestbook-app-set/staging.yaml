@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: apps/guestbook/overlays/staging
   destination:
-    server: https://staging.vc-staging
+    server: https://staging.vc-staging:443
     namespace: guestbook
   syncPolicy:
     automated:
