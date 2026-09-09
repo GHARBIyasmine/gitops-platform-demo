@@ -1,0 +1,59 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: vcluster-control-plane-ingress
+  namespace: vc-dev
+spec:
+  endpointSelector:
+    matchLabels:
+      app: vcluster
+      release: dev
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: argocd
+            app.kubernetes.io/name: argocd-application-controller
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: vcluster-control-plane-ingress
+  namespace: vc-staging
+spec:
+  endpointSelector:
+    matchLabels:
+      app: vcluster
+      release: staging
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: argocd
+            app.kubernetes.io/name: argocd-application-controller
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: vcluster-control-plane-ingress
+  namespace: vc-prod
+spec:
+  endpointSelector:
+    matchLabels:
+      app: vcluster
+      release: prod
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: argocd
+            app.kubernetes.io/name: argocd-application-controller
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP

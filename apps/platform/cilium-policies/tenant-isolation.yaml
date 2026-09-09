@@ -9,9 +9,6 @@ spec:
     - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: vc-dev
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: argocd
   egress:
     - toEndpoints:
         - matchLabels:
@@ -39,9 +36,6 @@ spec:
     - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: vc-staging
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: argocd
   egress:
     - toEndpoints:
         - matchLabels:
@@ -69,9 +63,6 @@ spec:
     - fromEndpoints:
         - matchLabels:
             k8s:io.kubernetes.pod.namespace: vc-prod
-    - fromEndpoints:
-        - matchLabels:
-            k8s:io.kubernetes.pod.namespace: argocd
   egress:
     - toEndpoints:
         - matchLabels:

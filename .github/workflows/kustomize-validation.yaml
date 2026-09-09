@@ -1,0 +1,30 @@
+name: validate
+on: 
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          sudo mv kustomize /usr/local/bin/
+
+      - name: Build overlays
+        run: |
+          mkdir -p rendered
+          for env in dev staging prod; do
+            kustomize build apps/guestbook/overlays/$env > rendered/$env.yaml
+          done
+          kustomize build apps/platform/cilium-policies > rendered/cilium-policies.yaml
+
+      - name: Validate with kubeconform
+        uses: docker://ghcr.io/yannh/kubeconform:latest
+        with:
+          args: -summary -strict -ignore-missing-schemas rendered
