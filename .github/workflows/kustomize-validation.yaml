@@ -27,4 +27,5 @@ jobs:
       - name: Validate with kubeconform
         uses: docker://ghcr.io/yannh/kubeconform:latest
         with:
-          args: -summary -strict -ignore-missing-schemas rendered
+          entrypoint: '/kubeconform'
+          args: "-summary -strict -ignore-missing-schemas -schema-location default -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' rendered"
